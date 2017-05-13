@@ -1,0 +1,14 @@
+package com.btc.bl.dmos;
+
+public interface Requirement {
+	public String getName();
+    public String getShortDescription();
+    public String getLongDescription();
+    public int getDay();
+    public int getMonth();
+    public int getYear();
+    public int getModifDay();
+    public int getModifMonth();
+    public int getModifYear();
+    public String getCreator();
+}
