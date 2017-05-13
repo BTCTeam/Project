@@ -1,0 +1,12 @@
+package com.btc.bl.services;
+
+import java.awt.Composite;
+import java.util.List;
+import com.btc.bl.dmos.Requirement;
+
+public interface RequirementServices {
+	void create(String nume,String sdescription,String ldescription,int day,int month,int year,String creator);
+	void displayAll();
+	void printOne(String numec);
+	
+}
