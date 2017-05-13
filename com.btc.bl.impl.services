@@ -1,0 +1,44 @@
+package com.btc.bl.internal.services;
+
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.eclipse.swt.widgets.Composite;
+import org.osgi.service.component.annotations.Component;
+
+import com.btc.bl.dmos.Requirement;
+import com.btc.bl.internal.dmos.RequirementImpl;
+import com.btc.bl.services.RequirementServices;
+
+@Component
+public class RequirementServiceImpl implements RequirementServices{
+
+	private List<Requirement> req=new ArrayList<Requirement>();
+	@Override
+	public void create(String nume,String sdescription,String ldescription,int day,int month,int year,String creator) {
+		Requirement r=new RequirementImpl(nume,sdescription,ldescription,day,month,year,creator);
+		req.add(r);
+		System.out.println("Done");
+	}
+
+	public void displayAll()
+	{
+		
+		for(int i=0;i<req.size();i++)
+        {
+        	System.out.println(req.get(i).getName()+" "+req.get(i).getShortDescription()+" "+req.get(i).getLongDescription()+" "+req.get(i).getDay()+" "+req.get(i).getMonth()+" "+req.get(i).getYear()+" "+req.get(i).getCreator());
+        }
+	}
+	
+	public void printOne(String numec)
+	{
+		for(int i=0;i<req.size();i++)
+		{
+			if(req.get(i).getName().equals(numec))
+			{
+				System.out.println(req.get(i).getName()+" "+req.get(i).getShortDescription()+" "+req.get(i).getLongDescription()+" "+req.get(i).getDay()+" "+req.get(i).getMonth()+" "+req.get(i).getYear()+" "+req.get(i).getCreator());
+			}
+		}
+	}
+}
