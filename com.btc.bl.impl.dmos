@@ -1,0 +1,89 @@
+package com.btc.bl.internal.dmos;
+
+import com.btc.bl.dmos.Requirement;
+
+public class RequirementImpl implements Requirement{
+
+	private String name;
+    private String short_description;
+    private String long_description;
+    private int day;
+    private int month;
+    private int year;
+    private int last_day_modif;
+    private int last_month_modif;
+    private int last_year_modif;
+    private String creator;
+    
+	
+    public RequirementImpl(String nume,String sdescription,String ldescription,int day,int month,int year,String creator)
+    {
+        this.name=nume;
+        this.short_description=sdescription;
+        this.long_description=ldescription;
+        this.day=day;
+        this.month=month;
+        this.year=year;
+        this.last_day_modif=day;
+        this.last_month_modif=month;
+        this.last_year_modif=year;
+        this.creator=creator;
+    }
+	@Override
+	public String getName() {
+        return name;
+    }
+
+	@Override
+    public String getShortDescription() {
+        return short_description;
+    }
+    
+	@Override
+    public String getLongDescription() {
+        return long_description;
+    }
+    
+	@Override
+    public int getDay()
+    {
+    	return day;
+    }
+    
+	@Override
+    public int getMonth()
+    {
+    	return month;
+    }
+    
+	@Override
+    public int getYear()
+    {
+    	return year;
+    }
+    
+	@Override
+    public int getModifDay()
+    {
+    	return last_day_modif;
+    }
+    
+	@Override
+    public int getModifMonth()
+    {
+    	return last_month_modif;
+    }
+    
+	@Override
+    public int getModifYear()
+    {
+    	return last_year_modif;
+    }
+    
+	@Override
+    public String getCreator()
+    {
+    	return creator;
+    }
+
+}
