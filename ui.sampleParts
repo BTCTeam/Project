@@ -1,0 +1,148 @@
+package com.btc.ui.parts;
+
+import java.util.Arrays;
+import java.util.List;
+import javax.annotation.PostConstruct;
+import javax.inject.Inject;
+
+import org.eclipse.e4.ui.di.Focus;
+import org.eclipse.e4.ui.di.Persist;
+import org.eclipse.e4.ui.model.application.ui.MDirtyable;
+import org.eclipse.jface.viewers.ArrayContentProvider;
+import org.eclipse.jface.viewers.TableViewer;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.ModifyEvent;
+import org.eclipse.swt.events.ModifyListener;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.SelectionListener;
+import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Shell;
+import org.eclipse.swt.widgets.Text;
+
+import com.btc.bl.services.RequirementServices;
+
+public class SamplePart {
+
+	@Inject
+	private MDirtyable dirty;
+	@Inject
+	private RequirementServices requirementServices;
+	@PostConstruct
+	public void createComposite(Composite shell)
+	{
+		shell.setLayout(new GridLayout(2, false));
+		
+		Label labelName=new Label(shell, SWT.BORDER);
+        labelName.setText("Name: ");
+		        
+        Text textname=new Text(shell,SWT.BORDER);
+		        
+        Label labeShortlDescription=new Label(shell, SWT.BORDER);
+		labeShortlDescription.setText("Short Description: ");
+		        
+		Text textShortDescription=new Text(shell,SWT.BORDER);
+		        
+		Label labeLonglDescription=new Label(shell, SWT.BORDER);
+		labeLonglDescription.setText("Long Description: ");
+		        
+		 Text textLongDescription=new Text(shell,SWT.BORDER);
+		        
+        Label labelDay=new Label(shell, SWT.BORDER);
+        labelDay.setText("Day: ");
+		        
+        Text textDay=new Text(shell,SWT.BORDER);
+        
+        Label labelMonth=new Label(shell, SWT.BORDER);
+        labelMonth.setText("Month: ");
+		        
+        Text textMonth=new Text(shell,SWT.BORDER);
+	        
+        Label labelYear=new Label(shell, SWT.BORDER);
+        labelYear.setText("Year: ");
+		        
+        Text textYear=new Text(shell,SWT.BORDER);
+		        
+        Label labelCreator=new Label(shell, SWT.BORDER);
+        labelCreator.setText("Creator: ");
+		        
+        Text textCreator=new Text(shell,SWT.BORDER);
+		        
+        Button button1=new Button(shell,SWT.BORDER);
+        button1.setText("Add requirement");
+		button1.addSelectionListener(new SelectionListener() {
+		        	
+	        @Override
+            public void widgetSelected(SelectionEvent e) {
+            requirementServices.create(textname.getText(),textShortDescription.getText(),textLongDescription.getText(),Integer.parseInt(textDay.getText()),Integer.parseInt(textMonth.getText()),Integer.parseInt(textYear.getText()),textCreator.getText());
+                textname.setText("");
+                textShortDescription.setText("");
+                textLongDescription.setText("");
+                textDay.setText("");
+                textMonth.setText("");
+                textYear.setText("");
+                textCreator.setText("");
+            }
+
+			@Override
+            public void widgetDefaultSelected(SelectionEvent e) {
+		                
+	            }
+		        });
+		        
+        Button button2=new Button(shell,SWT.BORDER);
+        button2.setText("Display all");
+        button2.addSelectionListener(new SelectionListener() {
+		            
+           @Override
+           public void widgetSelected(SelectionEvent e) {
+        	    	   	requirementServices.displayAll();
+		            }
+		            
+            @Override
+            public void widgetDefaultSelected(SelectionEvent e) {
+		                                
+		            }
+	        });
+				
+        Label labeldispOne=new Label(shell, SWT.BORDER);
+        labeldispOne.setText("Requirement to print: ");
+		        
+        Text textdispOne=new Text(shell,SWT.BORDER);
+		       
+        Button button3=new Button(shell,SWT.BORDER);
+        button3.setText("Display one");
+        button3.addSelectionListener(new SelectionListener() {
+			
+		@Override
+		public void widgetSelected(SelectionEvent e) {
+				requirementServices.printOne(textdispOne.getText());
+			}
+			
+		@Override
+		public void widgetDefaultSelected(SelectionEvent e) {
+			
+				
+			}
+		});
+		        
+        Label labelEditOne=new Label(shell, SWT.BORDER);
+        labelEditOne.setText("Requirement to edit: ");
+		        
+        Text textEditOne=new Text(shell,SWT.BORDER);
+		        
+	}	
+
+	@Persist
+	public void save() {
+		dirty.setDirty(false);
+			}
+			
+	private List<String> createInitialDataModel() {
+	return Arrays.asList("Sample item 1", "Sample item 2", "Sample item 3", "Sample item 4", "Sample item 5");
+			}
+}
